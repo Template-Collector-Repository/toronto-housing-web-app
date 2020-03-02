@@ -21,6 +21,18 @@ async function getHousePrediction(data) {
 
 }
 
+function validateInput(fields) {
+    for(const input of fields) {
+        if(input.value === '') {
+            alert('Field is required');
+            break;
+        } else if(typeof input.value != 'number') {
+            alert('Input must be a number');
+            break;
+        }
+    }
+}
+
 submit_btn.addEventListener('click', () => {
     const data = {'bathrooms': parseInt(bathrooms.value),
                 'sqft': parseInt(sqft.value),
@@ -30,6 +42,7 @@ submit_btn.addEventListener('click', () => {
                 'housing_type': type.value,
                 'district': district.value};
 
+    validateInput([sqft, bathrooms, bedroomsA, bedroomsB,parking]);
     getHousePrediction(data);
 
     // priceTag.innerText = predictedPrice;
